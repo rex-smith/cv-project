@@ -7,7 +7,7 @@ class Header extends React.Component {
     super();
 
     this.state = {
-      showForm: false,
+      showForm: true,
       fullName: "Jane L. Doe",
       address: "123 Appletree Way",
       email: "janedoe@gmail.com",
