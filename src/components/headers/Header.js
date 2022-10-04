@@ -1,6 +1,7 @@
 import React from "react";
 import HeaderDisplay from "./HeaderDisplay";
 import HeaderForm from "./HeaderForm";
+import "./header.css";
 
 class Header extends React.Component {
   constructor() {

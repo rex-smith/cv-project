@@ -1,5 +1,16 @@
 * {
   box-sizing: border-box;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.main-container {
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
 }
 
 .button {
@@ -25,4 +36,16 @@
 .button-save {
   background-color: #6f42c1;
   border-bottom: solid 4px #553098;
+}
+
+.button-add {
+  background-color: #2b6cb0;
+  border-bottom: solid 4px #2c5282;
+}
+
+@media screen and (min-width: 612px) {
+  .main-container {
+    width: 8.5in;
+    height: 11in;
+  }
 }

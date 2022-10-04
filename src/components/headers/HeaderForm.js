@@ -1,5 +1,4 @@
 import React from "react";
-import "./header.css";
 
 class FormHeader extends React.Component {
   constructor(props) {
@@ -33,8 +32,7 @@ class FormHeader extends React.Component {
           action=""
           onSubmit={this.props.handleHeaderSubmit}
         >
-          <div className="name-field">
-            <label htmlFor="fullName">Full Name</label>
+          <div className="form-group field">
             <input
               type="text"
               id="fullName"
@@ -42,11 +40,14 @@ class FormHeader extends React.Component {
               placeholder="full name..."
               value={this.state.fullName}
               onChange={this.handleInputChange}
+              className="form-field name"
             />
+            <label htmlFor="fullName" className="form-label">
+              Full Name
+            </label>
           </div>
           <div className="secondary-fields">
-            <div className="header-secondary-field">
-              <label htmlFor="address">Address</label>
+            <div className="form-group field">
               <input
                 type="text"
                 id="address"
@@ -54,11 +55,14 @@ class FormHeader extends React.Component {
                 placeholder="address..."
                 value={this.state.address}
                 onChange={this.handleInputChange}
+                className="form-field"
               />
+              <label htmlFor="address" className="form-label">
+                Address
+              </label>
             </div>
             <span className="bar"></span>
-            <div className="header-secondary-field">
-              <label htmlFor="email">Email</label>
+            <div className="form-group field">
               <input
                 type="email"
                 id="email"
@@ -66,11 +70,14 @@ class FormHeader extends React.Component {
                 placeholder="email..."
                 value={this.state.email}
                 onChange={this.handleInputChange}
+                className="form-field"
               />
+              <label htmlFor="email" className="form-label">
+                Email
+              </label>
             </div>
             <span className="bar"></span>
-            <div className="header-secondary-field">
-              <label htmlFor="phone">Phone</label>
+            <div className="form-group field">
               <input
                 type="text"
                 id="phone"
@@ -78,7 +85,11 @@ class FormHeader extends React.Component {
                 placeholder="phone number..."
                 value={this.state.phone}
                 onChange={this.handleInputChange}
+                className="form-field"
               />
+              <label htmlFor="phone" className="form-label">
+                Phone
+              </label>
             </div>
           </div>
           <input type="submit" value="Save" className="button button-save" />

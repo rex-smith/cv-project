@@ -7,10 +7,11 @@ import "./styles/app.css";
 
 function App() {
   return (
-    <div>
+    <div className="main-container">
       <Header />
       <div>
         <h1>Education</h1>
+        <EducationList />
       </div>
       <div>
         <h1>Professional Experience</h1>
