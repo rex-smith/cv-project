@@ -7,18 +7,20 @@ class DisplayHeader extends React.Component {
 
   render() {
     return (
-      <div className="header-display">
-        <div className="name-field">{this.props.fullName}</div>
-        <div className="secondary-fields">
-          <div className="header-secondary-field">{this.props.address}</div>
-          <span className="bar"></span>
-          <div className="header-secondary-field">{this.props.email}</div>
-          <span className="bar"></span>
-          <div className="header-secondary-field">{this.props.phone}</div>
+      <div>
+        <div className="header">
+          <div className="header-field name">{this.props.fullName}</div>
+          <div className="secondary-header-fields">
+            <div className="header-field">{this.props.address}</div>
+            <span className="bar"></span>
+            <div className="header-field">{this.props.email}</div>
+            <span className="bar"></span>
+            <div className="header-field">{this.props.phone}</div>
+          </div>
+          <button onClick={this.props.showEdit} className="button button-edit">
+            Edit
+          </button>
         </div>
-        <button onClick={this.props.showEdit} className="button button-edit">
-          Edit
-        </button>
       </div>
     );
   }

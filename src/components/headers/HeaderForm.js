@@ -28,7 +28,7 @@ class FormHeader extends React.Component {
     return (
       <div>
         <form
-          className="header-form"
+          className="header"
           action=""
           onSubmit={this.props.handleHeaderSubmit}
         >
@@ -46,7 +46,7 @@ class FormHeader extends React.Component {
               Full Name
             </label>
           </div>
-          <div className="secondary-fields">
+          <div className="secondary-header-fields">
             <div className="form-group field">
               <input
                 type="text"

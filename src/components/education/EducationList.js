@@ -11,10 +11,10 @@ class EducationList extends React.Component {
       showForm: true,
       educationArray: [
         {
-          institution: "",
-          degree: "",
-          time: "",
-          location: "",
+          institution: "University of Waterloo",
+          degree: "Bachelor of Arts",
+          time: "2014 - 2018",
+          location: "Waterloo, Canada",
           id: uniqid(),
         },
       ],
@@ -72,7 +72,6 @@ class EducationList extends React.Component {
   };
 
   render() {
-    console.log(this.state.educationArray);
     return (
       <div className="education-list">
         {this.state.showForm
@@ -83,7 +82,6 @@ class EducationList extends React.Component {
                   degree={item.degree}
                   time={item.time}
                   location={item.location}
-                  addEducationItem={this.addEducationItem}
                   handleEducationSubmit={this.handleEducationSubmit}
                   key={item.id}
                   id={item.id}
@@ -97,18 +95,20 @@ class EducationList extends React.Component {
                   degree={item.degree}
                   time={item.time}
                   location={item.location}
-                  addEducationItem={this.addEducationItem}
-                  showEducationForm={this.showEducationForm}
                   key={item.id}
                   id={item.id}
                 />
               );
             })}
+        <button onClick={this.showEducationForm} className="button button-edit">
+          Edit
+        </button>
+        <button onClick={this.addEducationItem} className="button button-add">
+          Add New
+        </button>
       </div>
     );
   }
 }
 
 export default EducationList;
-
-// https://reactjs.org/docs/lists-and-keys.html

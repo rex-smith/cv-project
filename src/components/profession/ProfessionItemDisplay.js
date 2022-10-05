@@ -1,17 +1,17 @@
 import React from "react";
 
-class EducationItemDisplay extends React.Component {
+class ProfessionItemDisplay extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
     return (
-      <div className="education-item-container">
-        <div className="education-column-container">
+      <div className="profession-item-container">
+        <div className="profession-column-container">
           <div className="column">
-            <h2>{this.props.institution}</h2>
-            <h2>{this.props.degree}</h2>
+            <h2>{this.props.company}</h2>
+            <h2>{this.props.position}</h2>
           </div>
           <div className="column">
             <h2 className="align-right">{this.props.location}</h2>
@@ -23,4 +23,4 @@ class EducationItemDisplay extends React.Component {
   }
 }
 
-export default EducationItemDisplay;
+export default ProfessionItemDisplay;

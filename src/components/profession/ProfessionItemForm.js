@@ -1,12 +1,12 @@
 import React from "react";
 
-class EducationItemForm extends React.Component {
+class ProfessionItemForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      institution: props.institution,
-      degree: props.degree,
+      company: props.company,
+      position: props.position,
       time: props.time,
       location: props.location,
       id: props.id,
@@ -29,38 +29,38 @@ class EducationItemForm extends React.Component {
     return (
       <div>
         <form
-          className="education-item-container"
+          className="profession-item-container"
           action=""
-          onSubmit={(e) => this.props.handleEducationSubmit(e, this.props.id)}
+          onSubmit={(e) => this.props.handleProfessionSubmit(e, this.props.id)}
         >
-          <div className="education-column-container">
+          <div className="profession-column-container">
             <div className="column">
               <div className="form-group field">
                 <input
                   type="text"
-                  id="institution"
-                  name="institution"
-                  placeholder="institution..."
-                  value={this.state.institution}
+                  id="company"
+                  name="company"
+                  placeholder="company..."
+                  value={this.state.company}
                   onChange={this.handleInputChange}
                   className="form-field left-align"
                 />
-                <label htmlFor="institution" className="form-label">
-                  Institution
+                <label htmlFor="company" className="form-label">
+                  Company
                 </label>
               </div>
               <div className="form-group field">
                 <input
                   type="text"
-                  id="degree"
-                  name="degree"
-                  placeholder="degree..."
-                  value={this.state.degree}
+                  id="position"
+                  name="position"
+                  placeholder="position..."
+                  value={this.state.position}
                   onChange={this.handleInputChange}
                   className="form-field left-align"
                 />
-                <label htmlFor="degree" className="form-label">
-                  Degree
+                <label htmlFor="position" className="form-label">
+                  Position
                 </label>
               </div>
             </div>
@@ -108,4 +108,4 @@ class EducationItemForm extends React.Component {
   }
 }
 
-export default EducationItemForm;
+export default ProfessionItemForm;
