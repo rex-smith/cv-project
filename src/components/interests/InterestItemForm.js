@@ -3,53 +3,34 @@ import React from "react";
 class InterestItemForm extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      interest: props.interest,
-      id: props.id,
-    };
-
-    this.handleInputChange = this.handleInputChange.bind(this);
-  }
-
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value,
-    });
   }
 
   render() {
+    const { interest, id, index } = this.props;
     return (
-      <div>
-        <form
-          action=""
-          className="interest-item-container"
-          onSubmit={(e) => this.props.handleInterestSubmit(e, this.props.id)}
-        >
-          <div className="form-group field">
-            <input
-              type="text"
-              id="interest"
-              name="interest"
-              placeholder="interest..."
-              value={this.state.interest}
-              onChange={this.handleInputChange}
-              className="form-field left-align"
-            />
-            <label htmlFor="interest" className="form-label">
-              Interest
-            </label>
-          </div>
+      <div className="interest-item-container">
+        <div className="form-group field">
           <input
-            type="submit"
-            value="Save"
-            className="button button-save"
-          ></input>
-        </form>
+            type="text"
+            id="interest"
+            name="interest"
+            placeholder="interest..."
+            value={interest}
+            onChange={(e) => this.props.handleChange(index, e)}
+            className="form-field left-align"
+          />
+          <label htmlFor="interest" className="form-label">
+            Interest
+          </label>
+        </div>
+        <div className="delete-button-container">
+          <button
+            className="button button-delete"
+            onClick={(e) => this.props.removeInterestItem(e, id)}
+          >
+            Delete
+          </button>
+        </div>
       </div>
     );
   }
