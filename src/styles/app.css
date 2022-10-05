@@ -173,6 +173,6 @@ ul {
 @media screen and (min-width: 612px) {
   .main-container {
     width: 8.5in;
-    height: 11in;
+    height: auto;
   }
 }

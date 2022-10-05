@@ -1,8 +1,8 @@
 .profession-item-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
-  position: relative;
 }
 
 .profession-column-container {

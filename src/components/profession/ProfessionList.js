@@ -21,9 +21,12 @@ class ProfessionList extends React.Component {
     };
 
     this.addProfessionItem = this.addProfessionItem.bind(this);
+    this.removeProfessionItem = this.removeProfessionItem.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  addProfessionItem() {
+  addProfessionItem(event) {
+    event.preventDefault();
     this.setState((prevState) => ({
       professionArray: [
         ...prevState.professionArray,
@@ -39,83 +42,110 @@ class ProfessionList extends React.Component {
     }));
   }
 
-  handleProfessionSubmit = (event, id) => {
+  removeProfessionItem(event, id) {
     event.preventDefault();
-    let company = event.target.company.value;
-    let position = event.target.position.value;
-    let time = event.target.time.value;
-    let location = event.target.location.value;
-
-    // Updating the information for the profession Item that was submitted
     this.setState((prevState) => ({
-      professionArray: prevState.professionArray.map((item) => {
-        if (item.id === id) {
-          return {
-            company: company,
-            position: position,
-            time: time,
-            location: location,
-            id: id,
-          };
-        } else {
-          return item;
-        }
-      }),
-      showForm: false,
+      professionArray: prevState.professionArray.filter(
+        (item) => item.id !== id
+      ),
     }));
+  }
+
+  handleChange(index, e) {
+    let professionArray = this.state.professionArray;
+    professionArray[index][e.target.name] = e.target.value;
+    this.setState({ professionArray: professionArray });
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.setState({
+      showForm: false,
+    });
   };
 
-  showProfessionForm = () => {
+  showProfessionForm = (event) => {
+    event.preventDefault();
     this.setState({
       showForm: true,
     });
   };
 
   render() {
-    return (
-      <div className="profession-list">
-        {this.state.showForm
-          ? this.state.professionArray.map((item) => {
-              return (
-                <ProfessionItemForm
-                  company={item.company}
-                  position={item.position}
-                  time={item.time}
-                  location={item.location}
-                  handleProfessionSubmit={this.handleProfessionSubmit}
-                  key={item.id}
-                  id={item.id}
-                />
-              );
-            })
-          : this.state.professionArray.map((item) => {
-              return (
-                <ProfessionItemDisplay
-                  company={item.company}
-                  position={item.position}
-                  time={item.time}
-                  location={item.location}
-                  key={item.id}
-                  id={item.id}
-                />
-              );
-            })}
-        <div className="button-container">
-          <button
-            onClick={this.showProfessionForm}
-            className="button button-edit"
-          >
-            Edit
-          </button>
-          <button
-            onClick={this.addProfessionItem}
-            className="button button-add"
-          >
-            Add New
-          </button>
+    const { showForm } = this.state;
+    let content;
+    if (showForm) {
+      content = (
+        <form
+          action=""
+          className="profession-item-container"
+          onSubmit={this.handleSubmit}
+        >
+          {this.state.professionArray.map((item, index) => {
+            return (
+              <ProfessionItemForm
+                company={item.company}
+                position={item.position}
+                time={item.time}
+                location={item.location}
+                handleChange={this.handleChange}
+                removeProfessionItem={this.removeProfessionItem}
+                key={item.id}
+                index={index}
+                id={item.id}
+              />
+            );
+          })}
+          <div className="button-container">
+            <button
+              onClick={this.showProfessionForm}
+              className="button button-edit"
+            >
+              Edit
+            </button>
+            <button
+              onClick={this.addProfessionItem}
+              className="button button-add"
+            >
+              Add New
+            </button>
+            <input type="submit" value="Save" className="button button-save" />
+          </div>
+        </form>
+      );
+    } else {
+      content = (
+        <div>
+          {this.state.professionArray.map((item) => {
+            return (
+              <ProfessionItemDisplay
+                company={item.company}
+                position={item.position}
+                time={item.time}
+                location={item.location}
+                key={item.id}
+                id={item.id}
+              />
+            );
+          })}
+          <div className="button-container">
+            <button
+              onClick={this.showProfessionForm}
+              className="button button-edit"
+            >
+              Edit
+            </button>
+            <button
+              onClick={this.addProfessionItem}
+              className="button button-add"
+            >
+              Add New
+            </button>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+    return <div className="profession-list">{content}</div>;
   }
 }
 

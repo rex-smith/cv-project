@@ -14,8 +14,8 @@ class EducationItemDisplay extends React.Component {
             <h2>{this.props.degree}</h2>
           </div>
           <div className="column">
-            <h2 className="align-right">{this.props.location}</h2>
-            <h2 className="align-right">{this.props.time}</h2>
+            <h2 className="right-align">{this.props.location}</h2>
+            <h2 className="right-align">{this.props.time}</h2>
           </div>
         </div>
       </div>
