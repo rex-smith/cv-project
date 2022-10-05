@@ -21,9 +21,12 @@ class EducationList extends React.Component {
     };
 
     this.addEducationItem = this.addEducationItem.bind(this);
+    this.removeEducationItem = this.removeEducationItem.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  addEducationItem() {
+  addEducationItem(event) {
+    event.preventDefault();
     this.setState((prevState) => ({
       educationArray: [
         ...prevState.educationArray,
@@ -39,80 +42,109 @@ class EducationList extends React.Component {
     }));
   }
 
-  handleEducationSubmit = (event, id) => {
+  removeEducationItem(event, id) {
     event.preventDefault();
-    let institution = event.target.institution.value;
-    let degree = event.target.degree.value;
-    let time = event.target.time.value;
-    let location = event.target.location.value;
-
-    // Updating the information for the Education Item that was submitted
     this.setState((prevState) => ({
-      educationArray: prevState.educationArray.map((item) => {
-        if (item.id === id) {
-          return {
-            institution: institution,
-            degree: degree,
-            time: time,
-            location: location,
-            id: id,
-          };
-        } else {
-          return item;
-        }
-      }),
-      showForm: false,
+      educationArray: prevState.educationArray.filter((item) => item.id !== id),
     }));
+  }
+
+  handleChange(index, e) {
+    let educationArray = this.state.educationArray;
+    educationArray[index][e.target.name] = e.target.value;
+    this.setState({ educationArray: educationArray });
+  }
+
+  handleEducationSubmit = (event) => {
+    event.preventDefault();
+    this.setState({
+      showForm: false,
+    });
   };
 
-  showEducationForm = () => {
+  showEducationForm = (event) => {
+    event.preventDefault();
     this.setState({
       showForm: true,
     });
   };
 
   render() {
-    return (
-      <div className="education-list">
-        {this.state.showForm
-          ? this.state.educationArray.map((item) => {
-              return (
-                <EducationItemForm
-                  institution={item.institution}
-                  degree={item.degree}
-                  time={item.time}
-                  location={item.location}
-                  handleEducationSubmit={this.handleEducationSubmit}
-                  key={item.id}
-                  id={item.id}
-                />
-              );
-            })
-          : this.state.educationArray.map((item) => {
-              return (
-                <EducationItemDisplay
-                  institution={item.institution}
-                  degree={item.degree}
-                  time={item.time}
-                  location={item.location}
-                  key={item.id}
-                  id={item.id}
-                />
-              );
-            })}
-        <div className="button-container">
-          <button
-            onClick={this.showEducationForm}
-            className="button button-edit"
-          >
-            Edit
-          </button>
-          <button onClick={this.addEducationItem} className="button button-add">
-            Add New
-          </button>
+    let { showForm } = this.state;
+    let content;
+    if (showForm) {
+      content = (
+        <form
+          action=""
+          onSubmit={this.handleEducationSubmit}
+          className="education-item-container"
+        >
+          {this.state.educationArray.map((item, index) => {
+            return (
+              <EducationItemForm
+                institution={item.institution}
+                degree={item.degree}
+                time={item.time}
+                location={item.location}
+                handleChange={this.handleChange}
+                removeEducationItem={this.removeEducationItem}
+                key={item.id}
+                index={index}
+                id={item.id}
+              />
+            );
+          })}
+          <div className="button-container">
+            <button
+              onClick={this.showEducationForm}
+              className="button button-edit"
+            >
+              Edit
+            </button>
+            <button
+              onClick={this.addEducationItem}
+              className="button button-add"
+            >
+              Add New
+            </button>
+            <input type="submit" value="Save" className="button button-save" />
+          </div>
+        </form>
+      );
+    } else {
+      content = (
+        <div>
+          {this.state.educationArray.map((item) => {
+            return (
+              <EducationItemDisplay
+                institution={item.institution}
+                degree={item.degree}
+                time={item.time}
+                location={item.location}
+                key={item.id}
+                id={item.id}
+              />
+            );
+          })}
+          <div className="button-container">
+            <button
+              onClick={this.showEducationForm}
+              className="button button-edit"
+            >
+              Edit
+            </button>
+            <button
+              onClick={this.addEducationItem}
+              className="button button-add"
+            >
+              Add New
+            </button>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+
+    return <div className="education-list">{content}</div>;
   }
 }
 

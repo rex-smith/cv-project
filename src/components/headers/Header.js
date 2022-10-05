@@ -39,32 +39,43 @@ class Header extends React.Component {
 
   render() {
     const { showForm } = this.state;
-
-    return (
-      <div className="header-container">
-        {showForm ? (
+    let content;
+    if (showForm) {
+      content = (
+        <form action="" className="header" onSubmit={this.handleHeaderSubmit}>
           <HeaderForm
             fullName={this.state.fullName}
             address={this.state.address}
             email={this.state.email}
             phone={this.state.phone}
-            handleHeaderSubmit={this.handleHeaderSubmit}
           />
-        ) : (
+          <div className="button-container">
+            <button onClick={this.showEdit} className="button button-edit">
+              Edit
+            </button>
+            <input type="submit" value="Save" className="button button-save" />
+          </div>
+        </form>
+      );
+    } else {
+      content = (
+        <div>
           <HeaderDisplay
             fullName={this.state.fullName}
             address={this.state.address}
             email={this.state.email}
             phone={this.state.phone}
           />
-        )}
-        <div className="button-container">
-          <button onClick={this.showEdit} className="button button-edit">
-            Edit
-          </button>
+          <div className="button-container">
+            <button onClick={this.showEdit} className="button button-edit">
+              Edit
+            </button>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+
+    return <div className="header-container">{content}</div>;
   }
 }
 

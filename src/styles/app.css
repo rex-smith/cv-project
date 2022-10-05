@@ -25,6 +25,18 @@
   gap: 10px;
 }
 
+.delete-button-container {
+  position: absolute;
+  top: 30%;
+  right: 110%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  gap: 10px;
+}
+
 .button {
   display: inline-block;
   padding: 0.5em 1em;
@@ -49,6 +61,11 @@
 .button-save {
   background-color: #6f42c1;
   border-bottom: solid 4px #553098;
+}
+
+.button-delete {
+  background-color: #e34a33;
+  border-bottom: solid 4px #c2331d;
 }
 
 .button-add {
