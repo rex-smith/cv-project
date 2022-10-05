@@ -39,27 +39,32 @@ class Header extends React.Component {
 
   render() {
     const { showForm } = this.state;
-    if (showForm) {
-      return (
-        <HeaderForm
-          fullName={this.state.fullName}
-          address={this.state.address}
-          email={this.state.email}
-          phone={this.state.phone}
-          handleHeaderSubmit={this.handleHeaderSubmit}
-        />
-      );
-    } else {
-      return (
-        <HeaderDisplay
-          fullName={this.state.fullName}
-          address={this.state.address}
-          email={this.state.email}
-          phone={this.state.phone}
-          showEdit={this.showEdit}
-        />
-      );
-    }
+
+    return (
+      <div className="header-container">
+        {showForm ? (
+          <HeaderForm
+            fullName={this.state.fullName}
+            address={this.state.address}
+            email={this.state.email}
+            phone={this.state.phone}
+            handleHeaderSubmit={this.handleHeaderSubmit}
+          />
+        ) : (
+          <HeaderDisplay
+            fullName={this.state.fullName}
+            address={this.state.address}
+            email={this.state.email}
+            phone={this.state.phone}
+          />
+        )}
+        <div className="button-container">
+          <button onClick={this.showEdit} className="button button-edit">
+            Edit
+          </button>
+        </div>
+      </div>
+    );
   }
 }
 

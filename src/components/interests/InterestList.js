@@ -2,6 +2,7 @@ import React from "react";
 import uniqid from "uniqid";
 import InterestItemForm from "./InterestItemForm";
 import InterestItemDisplay from "./InterestItemDisplay";
+import "./interests.css";
 
 class InterestList extends React.Component {
   constructor() {
@@ -82,12 +83,17 @@ class InterestList extends React.Component {
                 );
               })}
         </ul>
-        <button className="button button-edit" onClick={this.showInterestForm}>
-          Edit
-        </button>
-        <button className="button button-add" onClick={this.addInterestItem}>
-          Add New
-        </button>
+        <div className="button-container">
+          <button
+            className="button button-edit"
+            onClick={this.showInterestForm}
+          >
+            Edit
+          </button>
+          <button className="button button-add" onClick={this.addInterestItem}>
+            Add New
+          </button>
+        </div>
       </div>
     );
   }

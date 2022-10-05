@@ -17,9 +17,6 @@ class DisplayHeader extends React.Component {
             <span className="bar"></span>
             <div className="header-field">{this.props.phone}</div>
           </div>
-          <button onClick={this.props.showEdit} className="button button-edit">
-            Edit
-          </button>
         </div>
       </div>
     );

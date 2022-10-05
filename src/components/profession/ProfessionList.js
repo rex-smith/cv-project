@@ -100,15 +100,20 @@ class ProfessionList extends React.Component {
                 />
               );
             })}
-        <button
-          onClick={this.showProfessionForm}
-          className="button button-edit"
-        >
-          Edit
-        </button>
-        <button onClick={this.addProfessionItem} className="button button-add">
-          Add New
-        </button>
+        <div className="button-container">
+          <button
+            onClick={this.showProfessionForm}
+            className="button button-edit"
+          >
+            Edit
+          </button>
+          <button
+            onClick={this.addProfessionItem}
+            className="button button-add"
+          >
+            Add New
+          </button>
+        </div>
       </div>
     );
   }

@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
+  position: relative;
 }
 
 .profession-column-container {
@@ -19,5 +20,6 @@
 }
 
 .profession-list {
+  position: relative;
   margin-bottom: 10px;
 }

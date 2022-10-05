@@ -100,12 +100,17 @@ class EducationList extends React.Component {
                 />
               );
             })}
-        <button onClick={this.showEducationForm} className="button button-edit">
-          Edit
-        </button>
-        <button onClick={this.addEducationItem} className="button button-add">
-          Add New
-        </button>
+        <div className="button-container">
+          <button
+            onClick={this.showEducationForm}
+            className="button button-edit"
+          >
+            Edit
+          </button>
+          <button onClick={this.addEducationItem} className="button button-add">
+            Add New
+          </button>
+        </div>
       </div>
     );
   }
