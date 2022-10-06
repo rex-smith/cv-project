@@ -6,7 +6,9 @@ class ProfessionItemForm extends React.Component {
   }
 
   render() {
-    const { company, position, time, location, index, id } = this.props;
+    const { company, position, time, location, id, responsibilityArray } =
+      this.props;
+    const professionIndex = this.props.index;
     return (
       <div className="profession-item-container">
         <div className="profession-column-container">
@@ -18,7 +20,7 @@ class ProfessionItemForm extends React.Component {
                 name="company"
                 placeholder="company..."
                 value={company}
-                onChange={(e) => this.props.handleChange(index, e)}
+                onChange={(e) => this.props.handleChange(professionIndex, e)}
                 className="form-field left-align"
               />
               <label htmlFor="company" className="form-label">
@@ -32,7 +34,7 @@ class ProfessionItemForm extends React.Component {
                 name="position"
                 placeholder="position..."
                 value={position}
-                onChange={(e) => this.props.handleChange(index, e)}
+                onChange={(e) => this.props.handleChange(professionIndex, e)}
                 className="form-field left-align"
               />
               <label htmlFor="position" className="form-label">
@@ -48,7 +50,7 @@ class ProfessionItemForm extends React.Component {
                 name="location"
                 placeholder="location..."
                 value={location}
-                onChange={(e) => this.props.handleChange(index, e)}
+                onChange={(e) => this.props.handleChange(professionIndex, e)}
                 className="form-field right-align"
               />
               <label
@@ -65,13 +67,45 @@ class ProfessionItemForm extends React.Component {
                 name="time"
                 placeholder="time..."
                 value={time}
-                onChange={(e) => this.props.handleChange(index, e)}
+                onChange={(e) => this.props.handleChange(professionIndex, e)}
                 className="form-field right-align"
               />
               <label htmlFor="time" className="form-label right-align-absolute">
                 Time
               </label>
             </div>
+          </div>
+          {responsibilityArray.map((item, responsibilityIndex) => {
+            return (
+              <div className="form-group field responsibility" key={item.id}>
+                <input
+                  type="text"
+                  id="responsibility"
+                  name="responsibility"
+                  placeholder="responsibility..."
+                  value={item.responsibility}
+                  onChange={(e) =>
+                    this.props.handleResponsibilityChange(
+                      responsibilityIndex,
+                      professionIndex,
+                      e
+                    )
+                  }
+                  className="form-field left-align"
+                />
+                <label htmlFor="responsibility" className="form-label">
+                  Responsibility
+                </label>
+              </div>
+            );
+          })}
+          <div>
+            <button
+              className="button button-add"
+              onClick={(e) => this.props.addResponsibilityItem(e, id)}
+            >
+              Add Responsibility
+            </button>
           </div>
         </div>
         <div className="delete-button-container">

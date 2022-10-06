@@ -6,6 +6,7 @@ class ProfessionItemDisplay extends React.Component {
   }
 
   render() {
+    const { responsibilityArray } = this.props;
     return (
       <div className="profession-item-container">
         <div className="profession-column-container">
@@ -16,6 +17,11 @@ class ProfessionItemDisplay extends React.Component {
           <div className="column">
             <h2 className="right-align">{this.props.location}</h2>
             <h2 className="right-align">{this.props.time}</h2>
+          </div>
+          <div>
+            {responsibilityArray.map((item) => {
+              return <h3>{item.responsibility}</h3>;
+            })}
           </div>
         </div>
       </div>

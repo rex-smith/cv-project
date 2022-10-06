@@ -15,6 +15,12 @@ class ProfessionList extends React.Component {
           position: "Head of Security",
           time: "2020-2022",
           location: "San Francisco, CA",
+          responsibilityArray: [
+            {
+              responsibility: "",
+              id: uniqid(),
+            },
+          ],
           id: uniqid(),
         },
       ],
@@ -22,6 +28,10 @@ class ProfessionList extends React.Component {
 
     this.addProfessionItem = this.addProfessionItem.bind(this);
     this.removeProfessionItem = this.removeProfessionItem.bind(this);
+    this.addResponsibilityItem = this.addResponsibilityItem.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleResponsibilityChange =
+      this.handleResponsibilityChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -35,11 +45,56 @@ class ProfessionList extends React.Component {
           position: "",
           time: "",
           location: "",
+          responsibilityArray: [
+            {
+              responsibility: "",
+              id: uniqid(),
+            },
+          ],
           id: uniqid(),
         },
       ],
       showForm: true,
     }));
+  }
+
+  addResponsibilityItem(event, professionId) {
+    event.preventDefault();
+    this.setState((prevState) => ({
+      professionArray: prevState.professionArray.map((item) => {
+        let newItem = item;
+        if (item.id === professionId) {
+          newItem = {
+            company: item.company,
+            position: item.position,
+            time: item.time,
+            location: item.location,
+            responsibilityArray: [
+              ...item.responsibilityArray,
+              {
+                responsibility: "",
+                id: uniqid(),
+              },
+            ],
+            id: item.id,
+          };
+          return newItem;
+        } else {
+          return item;
+        }
+      }),
+    }));
+  }
+
+  handleResponsibilityChange(responsibilityIndex, professionIndex, e) {
+    let professionArray = this.state.professionArray;
+    let newResponsibilityArray =
+      professionArray[professionIndex].responsibilityArray;
+
+    newResponsibilityArray[responsibilityIndex][e.target.name] = e.target.value;
+    professionArray[professionIndex].responsibilityArray =
+      newResponsibilityArray;
+    this.setState({ professionArray: professionArray });
   }
 
   removeProfessionItem(event, id) {
@@ -88,11 +143,14 @@ class ProfessionList extends React.Component {
                 position={item.position}
                 time={item.time}
                 location={item.location}
-                handleChange={this.handleChange}
-                removeProfessionItem={this.removeProfessionItem}
+                responsibilityArray={item.responsibilityArray}
                 key={item.id}
                 index={index}
                 id={item.id}
+                handleChange={this.handleChange}
+                removeProfessionItem={this.removeProfessionItem}
+                addResponsibilityItem={this.addResponsibilityItem}
+                handleResponsibilityChange={this.handleResponsibilityChange}
               />
             );
           })}
@@ -123,6 +181,7 @@ class ProfessionList extends React.Component {
                 position={item.position}
                 time={item.time}
                 location={item.location}
+                responsibilityArray={item.responsibilityArray}
                 key={item.id}
                 id={item.id}
               />
