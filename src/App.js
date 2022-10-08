@@ -11,7 +11,7 @@ class App extends React.Component {
     return (
       <div className="main-container">
         <Header />
-        <div>
+        {/* <div>
           <h1>Education</h1>
           <EducationList />
         </div>
@@ -22,7 +22,7 @@ class App extends React.Component {
         <div>
           <h1>Interests</h1>
           <InterestList />
-        </div>
+        </div> */}
       </div>
     );
   }

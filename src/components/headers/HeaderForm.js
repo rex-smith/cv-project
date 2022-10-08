@@ -1,95 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import FormField from "../FormField";
 
-class FormHeader extends React.Component {
-  constructor(props) {
-    super(props);
+function FormHeader(props) {
+  const [fullName, setFullName] = useState(props.fullName);
+  const [address, setAddress] = useState(props.address);
+  const [email, setEmail] = useState(props.email);
+  const [phone, setPhone] = useState(props.phone);
 
-    this.state = {
-      fullName: props.fullName,
-      address: props.address,
-      email: props.email,
-      phone: props.phone,
-    };
-
-    this.handleInputChange = this.handleInputChange.bind(this);
-  }
-
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value,
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        <div className="form-group field">
-          <input
-            type="text"
-            id="fullName"
-            name="fullName"
-            placeholder="full name..."
-            value={this.state.fullName}
-            onChange={this.handleInputChange}
-            className="form-field name"
-          />
-          <label htmlFor="fullName" className="form-label">
-            Full Name
-          </label>
-        </div>
-        <div className="secondary-header-fields">
-          <div className="form-group field">
-            <input
-              type="text"
-              id="address"
-              name="address"
-              placeholder="address..."
-              value={this.state.address}
-              onChange={this.handleInputChange}
-              className="form-field"
-            />
-            <label htmlFor="address" className="form-label">
-              Address
-            </label>
-          </div>
-          <span className="bar"></span>
-          <div className="form-group field">
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="email..."
-              value={this.state.email}
-              onChange={this.handleInputChange}
-              className="form-field"
-            />
-            <label htmlFor="email" className="form-label">
-              Email
-            </label>
-          </div>
-          <span className="bar"></span>
-          <div className="form-group field">
-            <input
-              type="text"
-              id="phone"
-              name="phone"
-              placeholder="phone number..."
-              value={this.state.phone}
-              onChange={this.handleInputChange}
-              className="form-field"
-            />
-            <label htmlFor="phone" className="form-label">
-              Phone
-            </label>
-          </div>
-        </div>
+  return (
+    <div>
+      <div className="form-group field">
+        <FormField property="name" value={fullName} />
       </div>
-    );
-  }
+      <div className="secondary-header-fields">
+        <FormField property="address" value={address} />
+        <span className="bar"></span>
+        <FormField property="email" value={email} />
+        <span className="bar"></span>
+        <FormField property="phone" value={phone} />
+      </div>
+    </div>
+  );
 }
 
 export default FormHeader;

@@ -1,82 +1,67 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import HeaderDisplay from "./HeaderDisplay";
 import HeaderForm from "./HeaderForm";
+import Button from "../Button";
+import Submit from "../Submit";
 import "./header.css";
 
-class Header extends React.Component {
-  constructor() {
-    super();
+function Header(props) {
+  const [showForm, setShowForm] = useState(true);
+  const [fullName, setFullName] = useState("Jane L. Doe");
+  const [address, setAddress] = useState("123 Appletree Way");
+  const [email, setEmail] = useState("janedoe@gmail.com");
+  const [phone, setPhone] = useState("(123)456-7890");
 
-    this.state = {
-      showForm: true,
-      fullName: "Jane L. Doe",
-      address: "123 Appletree Way",
-      email: "janedoe@gmail.com",
-      phone: "(123)456-7890",
-    };
-  }
-
-  handleHeaderSubmit = (event) => {
+  const handleHeaderSubmit = (event) => {
     event.preventDefault();
-    let fullName = event.target.fullName.value;
-    let address = event.target.address.value;
-    let email = event.target.email.value;
-    let phone = event.target.phone.value;
-    this.setState({
-      showForm: false,
-      fullName: fullName,
-      address: address,
-      email: email,
-      phone: phone,
-    });
+    setFullName(event.target.name.value);
+    setAddress(event.target.address.value);
+    setEmail(event.target.email.value);
+    setPhone(event.target.phone.value);
+    setShowForm(false);
   };
 
-  showEdit = () => {
-    this.setState({
-      showForm: true,
-    });
+  const showEdit = () => {
+    setShowForm(true);
   };
 
-  render() {
-    const { showForm } = this.state;
-    let content;
-    if (showForm) {
-      content = (
-        <form action="" className="header" onSubmit={this.handleHeaderSubmit}>
-          <HeaderForm
-            fullName={this.state.fullName}
-            address={this.state.address}
-            email={this.state.email}
-            phone={this.state.phone}
-          />
-          <div className="button-container">
-            <button onClick={this.showEdit} className="button button-edit">
-              Edit
-            </button>
-            <input type="submit" value="Save" className="button button-save" />
-          </div>
-        </form>
-      );
-    } else {
-      content = (
-        <div>
-          <HeaderDisplay
-            fullName={this.state.fullName}
-            address={this.state.address}
-            email={this.state.email}
-            phone={this.state.phone}
-          />
-          <div className="button-container">
-            <button onClick={this.showEdit} className="button button-edit">
-              Edit
-            </button>
-          </div>
+  let content;
+  if (showForm) {
+    content = (
+      <form
+        action=""
+        className="header"
+        onSubmit={(e) => handleHeaderSubmit(e)}
+      >
+        <HeaderForm
+          fullName={fullName}
+          address={address}
+          email={email}
+          phone={phone}
+        />
+        <div className="button-container">
+          <Button onClick={showEdit} text="Edit" buttonClass="button-edit" />
+          <Submit />
         </div>
-      );
-    }
-
-    return <div className="header-container">{content}</div>;
+      </form>
+    );
+  } else {
+    content = (
+      <div>
+        <HeaderDisplay
+          fullName={fullName}
+          address={address}
+          email={email}
+          phone={phone}
+        />
+        <div className="button-container">
+          <Button onClick={showEdit} text="Edit" buttonClass="button-edit" />
+        </div>
+      </div>
+    );
   }
+
+  return <div className="header-container">{content}</div>;
 }
 
 export default Header;
