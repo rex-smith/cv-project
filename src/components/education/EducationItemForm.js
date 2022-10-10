@@ -1,90 +1,51 @@
 import React from "react";
+import FormField from "../FormField";
+import Button from "../Button";
 
-class EducationItemForm extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+function EducationItemForm(props) {
+  const { institution, degree, location, time, id } = props;
 
-  render() {
-    const { institution, degree, location, time, index, id } = this.props;
-    return (
-      <div className="education-item-container">
-        <div className="education-column-container">
-          <div className="column">
-            <div className="form-group field">
-              <input
-                type="text"
-                id="institution"
-                name="institution"
-                placeholder="institution..."
-                value={institution}
-                onChange={(e) => this.props.handleChange(index, e)}
-                className="form-field left-align"
-              />
-              <label htmlFor="institution" className="form-label">
-                Institution
-              </label>
-            </div>
-            <div className="form-group field">
-              <input
-                type="text"
-                id="degree"
-                name="degree"
-                placeholder="degree..."
-                value={degree}
-                onChange={(e) => this.props.handleChange(index, e)}
-                className="form-field left-align"
-              />
-              <label htmlFor="degree" className="form-label">
-                Degree
-              </label>
-            </div>
-          </div>
-          <div className="column">
-            <div className="form-group field">
-              <input
-                type="text"
-                id="location"
-                name="location"
-                placeholder="location..."
-                value={location}
-                onChange={(e) => this.props.handleChange(index, e)}
-                className="form-field right-align"
-              />
-              <label
-                htmlFor="location"
-                className="form-label right-align-absolute"
-              >
-                Location
-              </label>
-            </div>
-            <div className="form-group field">
-              <input
-                type="text"
-                id="time"
-                name="time"
-                placeholder="time..."
-                value={time}
-                onChange={(e) => this.props.handleChange(index, e)}
-                className="form-field right-align"
-              />
-              <label htmlFor="time" className="form-label right-align-absolute">
-                Time
-              </label>
-            </div>
-          </div>
+  return (
+    <div className="education-item-container">
+      <div className="education-column-container">
+        <div className="column">
+          <FormField
+            property="institution"
+            value={institution}
+            id={props.id}
+            alignment="left-align"
+          />
+          <FormField
+            property="degree"
+            value={degree}
+            id={props.id}
+            alignment="left-align"
+          />
         </div>
-        <div className="delete-button-container">
-          <button
-            onClick={(e) => this.props.removeEducationItem(e, id)}
-            className="button button-delete"
-          >
-            Delete
-          </button>
+        <div className="column">
+          <FormField
+            property="location"
+            value={location}
+            id={props.id}
+            alignment="right-align"
+          />
+          <FormField
+            property="time"
+            value={time}
+            id={props.id}
+            alignment="right-align"
+          />
         </div>
       </div>
-    );
-  }
+      <div className="delete-button-container">
+        <Button
+          onClick={(e) => props.removeEducationItem(e, id)}
+          text="Delete"
+          buttonClass="button-delete"
+        />
+      </div>
+    </div>
+  );
 }
 
 export default EducationItemForm;

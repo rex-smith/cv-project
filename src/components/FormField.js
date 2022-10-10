@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 function Field(props) {
   const capitalize = (s) =>
@@ -10,14 +10,14 @@ function Field(props) {
     <div className="form-group field">
       <input
         type="text"
-        id={props.property}
+        id={props.property + "-" + props.id}
         name={props.property}
         placeholder={capitalize(props.property) + "..."}
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        className="form-field"
+        className={"form-field " + props.alignment}
       />
-      <label htmlFor={props.property} className="form-label">
+      <label htmlFor={props.property + "-" + props.id} className="form-label">
         {capitalize(props.property)}
       </label>
     </div>
@@ -25,6 +25,3 @@ function Field(props) {
 }
 
 export default Field;
-
-// Figure out alignment differences, pass in classes as props?
-// How to handle each change in a lower level component

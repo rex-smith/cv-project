@@ -11,11 +11,11 @@ class App extends React.Component {
     return (
       <div className="main-container">
         <Header />
-        {/* <div>
+        <div>
           <h1>Education</h1>
           <EducationList />
         </div>
-        <div>
+        {/* <div>
           <h1>Professional Experience</h1>
           <ProfessionList />
         </div>

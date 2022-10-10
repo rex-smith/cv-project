@@ -1,26 +1,21 @@
 import React from "react";
+import DisplayField from "../DisplayField";
 
-class EducationItemDisplay extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div className="education-item-container">
-        <div className="education-column-container">
-          <div className="column">
-            <h2>{this.props.institution}</h2>
-            <h2>{this.props.degree}</h2>
-          </div>
-          <div className="column">
-            <h2 className="right-align">{this.props.location}</h2>
-            <h2 className="right-align">{this.props.time}</h2>
-          </div>
+function EducationItemDisplay(props) {
+  return (
+    <div className="education-item-container">
+      <div className="education-column-container">
+        <div className="column">
+          <DisplayField value={props.institution} />
+          <DisplayField value={props.degree} />
+        </div>
+        <div className="column">
+          <DisplayField value={props.location} />
+          <DisplayField value={props.time} />
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default EducationItemDisplay;
