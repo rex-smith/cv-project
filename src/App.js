@@ -15,11 +15,11 @@ class App extends React.Component {
           <h1>Education</h1>
           <EducationList />
         </div>
-        {/* <div>
+        <div>
           <h1>Professional Experience</h1>
           <ProfessionList />
         </div>
-        <div>
+        {/* <div>
           <h1>Interests</h1>
           <InterestList />
         </div> */}
