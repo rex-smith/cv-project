@@ -1,149 +1,131 @@
-import React from "react";
+import React, { useState } from "react";
 import uniqid from "uniqid";
 import InterestItemForm from "./InterestItemForm";
 import InterestItemDisplay from "./InterestItemDisplay";
 import "./interests.css";
 
-class InterestList extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      showForm: true,
-      interestArray: [
-        {
-          interest: "Hiking",
-          id: uniqid(),
-        },
-      ],
-    };
+function InterestList() {
+  const [showForm, setShowForm] = useState(true);
+  const [interestArray, setInterestArray] = useState([
+    {
+      interest: "Hiking",
+      id: uniqid(),
+    },
+  ]);
 
-    this.removeInterestItem = this.removeInterestItem.bind(this);
-    this.addInterestItem = this.addInterestItem.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  addInterestItem(event) {
+  const addInterestItem = (event) => {
     event.preventDefault();
-    this.setState((prevState) => ({
-      interestArray: [
-        ...prevState.interestArray,
-        {
-          interest: "",
-          id: uniqid(),
-        },
-      ],
-      showForm: true,
-    }));
-  }
-
-  handleChange(index, e) {
-    let interestArray = this.state.interestArray;
-    interestArray[index][e.target.name] = e.target.value;
-    this.setState({ interestArray: interestArray });
-  }
-
-  removeInterestItem(event, id) {
-    event.preventDefault();
-    this.setState((prevState) => ({
-      interestArray: prevState.interestArray.filter((item) => item.id !== id),
-    }));
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.setState({
-      showForm: false,
-    });
+    setInterestArray((prevInterestArray) => [
+      ...prevInterestArray,
+      {
+        interest: "",
+        id: uniqid(),
+      },
+    ]);
+    setShowForm(true);
   };
 
-  showInterestForm = (event) => {
+  const removeInterestItem = (event, id) => {
     event.preventDefault();
-    this.setState({
-      showForm: true,
-    });
+    setInterestArray((prevInterestArray) =>
+      prevInterestArray.filter((item) => item.id !== id)
+    );
   };
 
-  render() {
-    const { showForm } = this.state;
-    let content;
-    if (showForm) {
-      content = (
-        <div className="interest-list">
-          <form
-            action=""
-            className="interest-item-container"
-            onSubmit={this.handleSubmit}
-          >
-            <ul>
-              {this.state.interestArray.map((item, index) => {
-                return (
-                  <InterestItemForm
-                    interest={item.interest}
-                    id={item.id}
-                    key={item.id}
-                    index={index}
-                    handleChange={this.handleChange}
-                    removeInterestItem={this.removeInterestItem}
-                  />
-                );
-              })}
-            </ul>
-            <div className="button-container">
-              <button
-                className="button button-edit"
-                onClick={this.showInterestForm}
-              >
-                Edit
-              </button>
-              <button
-                className="button button-add"
-                onClick={this.addInterestItem}
-              >
-                Add New
-              </button>
-              <input
-                type="submit"
-                value="Save"
-                className="button button-save"
-              ></input>
-            </div>
-          </form>
-        </div>
-      );
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    let newInterestArray = [];
+    let submittedInterestArray = event.target.elements.interest;
+    if (submittedInterestArray.length) {
+      for (let i = 0; i < submittedInterestArray.length; i++) {
+        let interestObject = {
+          interest: submittedInterestArray[i].value,
+          id: uniqid(),
+        };
+        newInterestArray.push(interestObject);
+      }
     } else {
-      content = (
-        <div className="interest-item-container">
+      let interestObject = {
+        interest: submittedInterestArray.value,
+        id: uniqid(),
+      };
+      newInterestArray = [interestObject];
+    }
+    setInterestArray(newInterestArray);
+    setShowForm(false);
+  };
+
+  const showInterestForm = (event) => {
+    event.preventDefault();
+    setShowForm(true);
+  };
+
+  let content;
+  if (showForm) {
+    content = (
+      <div className="interest-list">
+        <form
+          action=""
+          className="interest-item-container"
+          onSubmit={handleSubmit}
+        >
           <ul>
-            {this.state.interestArray.map((item) => {
+            {interestArray.map((item, index) => {
               return (
-                <InterestItemDisplay
+                <InterestItemForm
                   interest={item.interest}
                   id={item.id}
                   key={item.id}
+                  index={index}
+                  removeInterestItem={removeInterestItem}
                 />
               );
             })}
           </ul>
           <div className="button-container">
-            <button
-              className="button button-edit"
-              onClick={this.showInterestForm}
-            >
+            <button className="button button-edit" onClick={showInterestForm}>
               Edit
             </button>
-            <button
-              className="button button-add"
-              onClick={this.addInterestItem}
-            >
+            <button className="button button-add" onClick={addInterestItem}>
               Add New
             </button>
+            <input
+              type="submit"
+              value="Save"
+              className="button button-save"
+            ></input>
           </div>
+        </form>
+      </div>
+    );
+  } else {
+    content = (
+      <div className="interest-item-container">
+        <ul>
+          {interestArray.map((item) => {
+            return (
+              <InterestItemDisplay
+                interest={item.interest}
+                id={item.id}
+                key={item.id}
+              />
+            );
+          })}
+        </ul>
+        <div className="button-container">
+          <button className="button button-edit" onClick={showInterestForm}>
+            Edit
+          </button>
+          <button className="button button-add" onClick={addInterestItem}>
+            Add New
+          </button>
         </div>
-      );
-    }
-
-    return <div className="interest-list">{content}</div>;
+      </div>
+    );
   }
+
+  return <div className="interest-list">{content}</div>;
 }
 
 export default InterestList;

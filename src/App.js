@@ -19,10 +19,10 @@ class App extends React.Component {
           <h1>Professional Experience</h1>
           <ProfessionList />
         </div>
-        {/* <div>
+        <div>
           <h1>Interests</h1>
           <InterestList />
-        </div> */}
+        </div>
       </div>
     );
   }
